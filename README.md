@@ -1,5 +1,5 @@
 # Number App
-A MacOS based number editing app
+A MacOS based number editing app made for practice
 # Information
 - The number 0 will be the default
 - Opens .number files (basicaly numbers in .txt files)

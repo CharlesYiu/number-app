@@ -1,12 +1,12 @@
 # Number App
 A MacOS based number editing app made for practice
 # Information
+- Uses Xamarin.Mac
 - The number 0 will be the default
 - Opens .number files (basicaly numbers in .txt files)
 - The app can't add decimal points (E.g. +0.5, -0.24)   
-(but you can create a .number file with decimal points)
-- Any errors with parsing the file to a number will default back
-- Uses Xamarin.Mac
+(you can still create a file with decimal points)
+- Any errors with parsing the file will default back to 0
 # Controls
 ## Basic
 ### Left click

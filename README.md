@@ -1,2 +1,4 @@
 # number-app
-A macOS single number editor app I made for practice
+A macOS number app I made for practice
+
+Uses Xamarin.Mac

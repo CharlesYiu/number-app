@@ -20,12 +20,12 @@ The ability to copy and paste numbers.
 Resets the number to it's default value.
 ## Issues
 ### Parsing files to numbers
-**Past behavior:** Defaults 0 when there is an error parsing.
-**Changed behavior:** Reformats characters before parsing.
+**Past behavior:** Defaults 0 when there is an error parsing.  
+**Changed behavior:** Reformats characters before parsing.  
 (E.g. "ab-c1de-2fg3h" will be reformated to "-123" before parsing)
 ### Files with decimal points
-**Past behavior:** Decimal points are just shown.
-**Changed behavior:** Decimal points will be rounded off.
+**Past behavior:** Decimal points are just shown.  
+**Changed behavior:** Decimal points will be rounded off.  
 # Controls
 ## Basic
 ### Left click

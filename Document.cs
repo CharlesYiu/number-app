@@ -13,10 +13,50 @@ namespace Number
         {
             public float NumberValue = 0;
             public Action<float> OnChange;
+            public float FormatNumber(float Number)
+            {
+                return ((float)Math.Round(Number));
+            }
+            public float FormatNumber(string Number)
+            {
+                string NewNumber = "";
+                // Dash is not added yet and no digit is detected yet
+                Boolean DashPossible = true;
+                // Filter out all characters except "-" or digits
+                foreach (char Character in Number.ToCharArray())
+                {
+                    // If is dash and DashPossible
+                    if (DashPossible && Character == '-')
+                    {
+                        // Add dash
+                        NewNumber += "-";
+                        // Makes sure the dash does not rerun again
+                        DashPossible = false;
+                    }
+                    // If is a digit
+                    else if (char.IsDigit(Character))
+                    {
+                        // Makes sure the dash does not get added
+                        DashPossible = false;
+                        // Add digit
+                        NewNumber += Character;
+                    }
+                }
+                // Set new formated number
+                Number = NewNumber;
+                // If can parse number
+                if (float.TryParse(Number, out float ParsedNumber))
+                {
+                    // Return parsed number
+                    return(ParsedNumber);
+                }
+                // if cannot parse, return Default value
+                return(0);
+            }
             public void ChangeNumber(float Number = 0)
             {
                 // Set new value
-                NumberValue = Number;
+                NumberValue = FormatNumber(Number);
                 // If Onchange value is set
                 if (OnChange != null)
                 {
@@ -26,35 +66,26 @@ namespace Number
             }
             public void ChangeNumber(string Number = "")
             {
-                // If not nothing
-                if (Number != "")
+                // Set new value
+                NumberValue = FormatNumber(Number);
+                // If Onchange value is set
+                if (OnChange != null)
                 {
-                    float FinalNumberValue = float.NaN;
-                    // If can parse number
-                    if (float.TryParse(Number, out float ParsedFloat))
-                    {
-                        // Set value
-                        FinalNumberValue = ParsedFloat;
-                    }
-                    // If no, try to round number
-                    else if (double.TryParse(Number, out double ParsedInt))
-                    {
-                        // Set value to rounded double that is rounded into a float
-                        FinalNumberValue = (float)Math.Round(ParsedInt);
-                    }
-                    // If changed successfully
-                    if (!float.IsNaN(FinalNumberValue))
-                    {
-                        // Set new value
-                        NumberValue = FinalNumberValue;
-                        // If Onchange value is set
-                        if (OnChange != null)
-                        {
-                            // run on change
-                            OnChange(NumberValue);
-                        }
-                    }
+                    // run on change
+                    OnChange(NumberValue);
                 }
+            }
+            public void CopyNumber()
+            {
+                // Clear clipboard
+                NSPasteboard.GeneralPasteboard.ClearContents();
+                // Copy number to clipboard
+                NSPasteboard.GeneralPasteboard.SetStringForType(NumberValue.ToString(), NSPasteboard.NSPasteboardTypeString);
+            }
+            public void PasteNumber()
+            {
+                // set number from clipboard
+                ChangeNumber(NSPasteboard.GeneralPasteboard.GetStringForType(NSPasteboard.NSPasteboardTypeString));
             }
             public Content(string Text = "")
             {

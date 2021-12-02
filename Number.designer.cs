@@ -24,6 +24,9 @@ namespace Number
 		[Action ("ClickAction:")]
 		partial void ClickAction (Foundation.NSObject sender);
 
+		[Action ("NumberInputAction:")]
+		partial void NumberInputAction (Foundation.NSObject sender);
+
 		[Action ("SecondaryClickAction:")]
 		partial void SecondaryClickAction (Foundation.NSObject sender);
 
@@ -40,14 +43,14 @@ namespace Number
 				NumberInput = null;
 			}
 
-			if (ZoomGesture != null) {
-				ZoomGesture.Dispose ();
-				ZoomGesture = null;
-			}
-
 			if (SwirlGesture != null) {
 				SwirlGesture.Dispose ();
 				SwirlGesture = null;
+			}
+
+			if (ZoomGesture != null) {
+				ZoomGesture.Dispose ();
+				ZoomGesture = null;
 			}
 		}
 	}

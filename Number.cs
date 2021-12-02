@@ -4,13 +4,11 @@ using System;
 using System.Threading.Tasks;
 using AppKit;
 using Foundation;
-using QuickLook;
 
 namespace Number
 {
     public partial class Number : NSViewController
 	{
-
         // Magnification Variables
         Boolean ZoomIn;
         Boolean InvertZoom;
@@ -20,31 +18,90 @@ namespace Number
         nfloat LastMagnification;
         public Document.Content NumberContent;
         public NSWindow Window;
+        AppDelegate ApplicationDelegate = (AppDelegate)NSApplication.SharedApplication.Delegate;
+        public Boolean Changable;
+        partial class NumberInputDelegate : NSTextFieldDelegate
+        {
+            [Export("controlTextDidChange:")]
+            public override void Changed(NSNotification notification)
+            {
+                NSTextField NumberInput = (NSTextField)notification.Object;
+                Number ViewController = (Number)NSApplication.SharedApplication.KeyWindow.ContentViewController;
+                Document.Content CurrentNumberContent = ViewController.NumberContent;
+                // Update number value
+                CurrentNumberContent.NumberValue = CurrentNumberContent.FormatNumber(NumberInput.StringValue);
+            }
+        }
         public Number (IntPtr handle) : base (handle)
 		{
 		}
         public override void ViewDidLoad()
         {
             base.ViewDidLoad();
+            // Set 
+            NumberInput.Delegate = new NumberInputDelegate();
         }
-
         // Function to update the user interface
         public void OnChange(float Number)
         {
-            string NumberString = Number.ToString();
-            Window.Title = "Number: " + NumberString;
-            NumberInput.StringValue = NumberString;
+            Window.Title = "Number: " + Number.ToString();
+            NumberInput.IntValue = (int)Number;
         }
-
+        // Function to make NumberInput Editable
+        public void SetChangable(Boolean State)
+        {
+            //Toggle editable
+            Changable = State;
+            // If editing now
+            if (Changable)
+            {
+                // Focus to editing
+                NumberInput.PlaceholderString = NumberInput.StringValue;
+                NumberInput.Editable = true;
+                NumberInput.SelectText(NumberInput);
+                NumberInput.CurrentEditor.SelectedRange = new NSRange(NumberInput.StringValue.Length, 0);
+                // Set title 
+                ApplicationDelegate.SetChangeButtonTitle("Stop Changing");
+            }
+            // If not editing anymore
+            else
+            {
+                // Stop Editing
+                if (NumberInput.StringValue != "")
+                {
+                    NumberContent.ChangeNumber(NumberInput.StringValue);
+                }
+                NumberInput.AbortEditing();
+                NumberInput.Editable = false;
+                // Set title
+                ApplicationDelegate.SetChangeButtonTitle("Change");
+            }
+        }
+        // When pressed return when editing
+        partial void NumberInputAction(NSObject sender)
+        {
+            // Exit 
+            SetChangable(false);
+        }
         // Primary Mouse Button Click
         partial void ClickAction(NSObject sender)
         {
+            // Don't run if editing (Clicks may happen when editing)
+            if (Changable)
+            {
+                return;
+            }
             // Add 1
             NumberContent.ChangeNumber(NumberContent.NumberValue + 1);
         }
         // Secondary Mouse Button Click
         partial void SecondaryClickAction(NSObject sender)
         {
+            // Don't run if editing (Click may happen when editing)
+            if (Changable)
+            {
+                return;
+            }
             // Minus 1
             NumberContent.ChangeNumber(NumberContent.NumberValue - 1);
         }

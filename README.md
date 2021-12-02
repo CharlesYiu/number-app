@@ -1,5 +1,5 @@
 # Number App
-A MacOS based number editing app made for practice
+A MacOS based number editing app I am making for practice
 # Information
 - Uses Xamarin.Mac
 - The number 0 will be the default

@@ -95,6 +95,36 @@
                                     </items>
                                 </menu>
                             </menuItem>
+                            <menuItem title="Edit" id="Jru-vc-rbO">
+                                <modifierMask key="keyEquivalentModifierMask"/>
+                                <menu key="submenu" title="Edit" id="SWP-Sq-UGj">
+                                    <items>
+                                        <menuItem title="Change" id="7ec-vJ-B4C">
+                                            <modifierMask key="keyEquivalentModifierMask"/>
+                                            <connections>
+                                                <action selector="ChangeAction:" target="Voe-Tx-rLC" id="a3j-S2-4yl"/>
+                                            </connections>
+                                        </menuItem>
+                                        <menuItem title="Reset" id="Rgk-Ol-fJT">
+                                            <modifierMask key="keyEquivalentModifierMask"/>
+                                            <connections>
+                                                <action selector="DeleteAction:" target="Voe-Tx-rLC" id="fKs-4o-JWu"/>
+                                            </connections>
+                                        </menuItem>
+                                        <menuItem isSeparatorItem="YES" id="JiC-Ty-YKI"/>
+                                        <menuItem title="Copy" keyEquivalent="c" id="B2Y-FD-qhX">
+                                            <connections>
+                                                <action selector="CopyAction:" target="Voe-Tx-rLC" id="UX7-lM-QH2"/>
+                                            </connections>
+                                        </menuItem>
+                                        <menuItem title="Paste" keyEquivalent="v" id="J9j-dJ-3UO">
+                                            <connections>
+                                                <action selector="PasteAction:" target="Voe-Tx-rLC" id="1Bv-tj-BKC"/>
+                                            </connections>
+                                        </menuItem>
+                                    </items>
+                                </menu>
+                            </menuItem>
                             <menuItem title="Window" id="aUF-d1-5bR">
                                 <modifierMask key="keyEquivalentModifierMask"/>
                                 <menu key="submenu" title="Window" systemMenu="window" id="Td7-aD-5lo">
@@ -126,7 +156,11 @@
                         <outlet property="delegate" destination="Voe-Tx-rLC" id="PrD-fu-P6m"/>
                     </connections>
                 </application>
-                <customObject id="Voe-Tx-rLC" customClass="AppDelegate"/>
+                <customObject id="Voe-Tx-rLC" customClass="AppDelegate">
+                    <connections>
+                        <outlet property="ChangeButton" destination="7ec-vJ-B4C" id="Js6-f0-oLs"/>
+                    </connections>
+                </customObject>
                 <customObject id="YLy-65-1bz" customClass="NSFontManager"/>
                 <customObject id="Ady-hI-5gd" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
@@ -175,6 +209,9 @@
                                     <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
+                                <connections>
+                                    <action selector="NumberInputAction:" target="5gI-5U-AMq" id="eZT-f0-Iee"/>
+                                </connections>
                             </textField>
                         </subviews>
                         <constraints>

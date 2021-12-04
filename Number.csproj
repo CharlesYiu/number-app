@@ -9,8 +9,8 @@
     <RootNamespace>Number</RootNamespace>
     <AssemblyName>Number</AssemblyName>
     <TargetFrameworkVersion>v2.0</TargetFrameworkVersion>
-    <TargetFrameworkIdentifier>Xamarin.Mac</TargetFrameworkIdentifier>
     <MonoMacResourcePrefix>Resources</MonoMacResourcePrefix>
+    <TargetFrameworkIdentifier>Xamarin.Mac</TargetFrameworkIdentifier>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -27,6 +27,8 @@
     <IncludeMonoRuntime>false</IncludeMonoRuntime>
     <UseSGen>true</UseSGen>
     <UseRefCounting>true</UseRefCounting>
+    <LinkMode>None</LinkMode>
+    <AOTMode>None</AOTMode>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -41,7 +43,8 @@
     <UseSGen>true</UseSGen>
     <UseRefCounting>true</UseRefCounting>
     <CodeSignEntitlements>Entitlements.plist</CodeSignEntitlements>
-    <LinkMode>SdkOnly</LinkMode>
+    <LinkMode>None</LinkMode>
+    <AOTMode>None</AOTMode>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
@@ -76,6 +79,18 @@
     <Compile Include="Number.cs" />
     <Compile Include="Number.designer.cs">
       <DependentUpon>Number.cs</DependentUpon>
+    </Compile>
+    <Compile Include="AppDelegate.designer.cs">
+      <DependentUpon>AppDelegate.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Preferences.cs" />
+    <Compile Include="Preferences.designer.cs">
+      <DependentUpon>Preferences.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Functions.cs" />
+    <Compile Include="About.cs" />
+    <Compile Include="About.designer.cs">
+      <DependentUpon>About.cs</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>

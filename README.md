@@ -1,45 +1,47 @@
 # Number App
 A MacOS based number editing app I am making for practice
-# Information
-- Uses Xamarin.Mac
-- The number 0 will be the default
-- Opens .number files (basicaly numbers in .txt files)
-- The app only supports non-decimal numbers
-# Latest Updates
-## Features
-### Directly edit numbers
+# Features
+## Directly edit numbers
 You can type numbers into the app.  
-#### Usage:
+### Usage:
 On the top bar when focused to the app, Edit -> Change.  
 If you want to stop editing, you can either press return or go to Edit -> Stop Changing.
-### Copy and Paste
+## Copy and Paste
 The ability to copy and paste numbers.  
 **Paste:** The number pasted will be parsed from text to number.  
 **Copy:** The number copied will be in text.  
-### Reset number
-Resets the number to it's default value.
-## Issues
-### Parsing files to numbers
-**Past behavior:** Defaults 0 when there is an error parsing.  
-**Changed behavior:** Reformats characters before parsing.  
-(E.g. "ab-c1de-2fg3h" will be reformated to "-123" before parsing)
-### Files with decimal points
-**Past behavior:** Decimal points are just shown.  
-**Changed behavior:** Decimal points will be rounded off.  
+## Reset number
+Resets the number to its default value.
+## Decimal points
+The app can add or minus numbers with decimals
+## Preferences
+Customize the behavior of the app.  
+**Default value:** The value to use when there is a reset or new file.  
+**Add value:** The preferred value to add.  
+**Minus value:** The preferred value to minus.  
+## Files
+The ability to save, load, and create .number files.
 # Controls
 ## Basic
 ### Left click
-Adds 1
+Adds 1 or the preferred value
 ### Right click
-Subtracts 1
+Subtracts 1 or the preferred value
 ## Trackpad only
 ### Rotate left
 Changes the number to negative
 ### Rotate right
 Changes the number to positive
 ### Magnify in
-Adds 1 repeatedly   
+Adds 1 or the preferred value repeatedly   
 (When the number is negative it will subtract instead)
 ### Magnify out
-Subtracts 1 repeatedly   
+Subtracts 1 or the preferred value repeatedly   
 (When the number is negative it will add instead)
+# Shortcuts
+## Change number
+Command+e
+## Reset number
+Command+r
+## Preferences
+Command+comma

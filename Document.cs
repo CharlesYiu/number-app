@@ -11,52 +11,12 @@ namespace Number
         public Content NumberContent = new Content();
         public class Content : NSObject
         {
-            public float NumberValue = 0;
-            public Action<float> OnChange;
-            public float FormatNumber(float Number)
-            {
-                return ((float)Math.Round(Number));
-            }
-            public float FormatNumber(string Number)
-            {
-                string NewNumber = "";
-                // Dash is not added yet and no digit is detected yet
-                Boolean DashPossible = true;
-                // Filter out all characters except "-" or digits
-                foreach (char Character in Number.ToCharArray())
-                {
-                    // If is dash and DashPossible
-                    if (DashPossible && Character == '-')
-                    {
-                        // Add dash
-                        NewNumber += "-";
-                        // Makes sure the dash does not rerun again
-                        DashPossible = false;
-                    }
-                    // If is a digit
-                    else if (char.IsDigit(Character))
-                    {
-                        // Makes sure the dash does not get added
-                        DashPossible = false;
-                        // Add digit
-                        NewNumber += Character;
-                    }
-                }
-                // Set new formated number
-                Number = NewNumber;
-                // If can parse number
-                if (float.TryParse(Number, out float ParsedNumber))
-                {
-                    // Return parsed number
-                    return(ParsedNumber);
-                }
-                // if cannot parse, return Default value
-                return(0);
-            }
-            public void ChangeNumber(float Number = 0)
+            public decimal NumberValue = PreferencesData.DefaultNumber;
+            public Action<decimal> OnChange;
+            public void ChangeNumber(decimal Number)
             {
                 // Set new value
-                NumberValue = FormatNumber(Number);
+                NumberValue = Functions.FormatNumber(Number, PreferencesData.IgnoreDecimals);
                 // If Onchange value is set
                 if (OnChange != null)
                 {
@@ -64,10 +24,10 @@ namespace Number
                     OnChange(NumberValue);
                 }
             }
-            public void ChangeNumber(string Number = "")
+            public void ChangeNumber(string Number)
             {
                 // Set new value
-                NumberValue = FormatNumber(Number);
+                NumberValue = Functions.FormatNumber(Number, PreferencesData.DefaultNumber, PreferencesData.IgnoreDecimals);
                 // If Onchange value is set
                 if (OnChange != null)
                 {
@@ -111,7 +71,7 @@ namespace Number
             // Override to return the Storyboard file name of the document.
             // Vars
             NSStoryboard Storyboard = NSStoryboard.FromName("Main", null);
-            NSWindowController WindowController = (NSWindowController)Storyboard.InstantiateControllerWithIdentifier("Document Window Controller");
+            NSWindowController WindowController = (NSWindowController)Storyboard.InstantiateControllerWithIdentifier("Main");
             // If There's a windowcontroller
             if (WindowController != null) {
                 // Add

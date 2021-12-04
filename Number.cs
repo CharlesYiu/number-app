@@ -4,22 +4,24 @@ using System;
 using System.Threading.Tasks;
 using AppKit;
 using Foundation;
+using CoreGraphics;
 
 namespace Number
 {
     public partial class Number : NSViewController
 	{
         // Magnification Variables
-        Boolean ZoomIn;
-        Boolean InvertZoom;
-        Boolean CanRunZoom = true;
+        bool ZoomIn;
+        bool InvertZoom;
+        bool CanRunZoom = true;
         nfloat MagnificationChange = 0.020f;
         nfloat ChangedMagnification = 0f;
         nfloat LastMagnification;
         public Document.Content NumberContent;
         public NSWindow Window;
         AppDelegate ApplicationDelegate = (AppDelegate)NSApplication.SharedApplication.Delegate;
-        public Boolean Changable;
+        public bool Changable = false;
+        public bool IgnoreInput = false;
         partial class NumberInputDelegate : NSTextFieldDelegate
         {
             [Export("controlTextDidChange:")]
@@ -29,7 +31,7 @@ namespace Number
                 Number ViewController = (Number)NSApplication.SharedApplication.KeyWindow.ContentViewController;
                 Document.Content CurrentNumberContent = ViewController.NumberContent;
                 // Update number value
-                CurrentNumberContent.NumberValue = CurrentNumberContent.FormatNumber(NumberInput.StringValue);
+                CurrentNumberContent.NumberValue = Functions.FormatNumber(NumberInput.StringValue, PreferencesData.DefaultNumber, PreferencesData.IgnoreDecimals);
             }
         }
         public Number (IntPtr handle) : base (handle)
@@ -38,18 +40,26 @@ namespace Number
         public override void ViewDidLoad()
         {
             base.ViewDidLoad();
+            // set background color
+            View.MakeBackingLayer();
+            View.Layer.BackgroundColor = new CGColor(CGConstantColor.White);
             // Set 
             NumberInput.Delegate = new NumberInputDelegate();
         }
         // Function to update the user interface
-        public void OnChange(float Number)
+        public void OnChange(decimal Number)
         {
-            Window.Title = "Number: " + Number.ToString();
-            NumberInput.IntValue = (int)Number;
+            string NumberText = Number.ToString();
+            Window.Title = "Number: " + NumberText;
+            NumberInput.StringValue = NumberText;
         }
         // Function to make NumberInput Editable
-        public void SetChangable(Boolean State)
+        public void SetChangable(bool State)
         {
+            if (IgnoreInput)
+            {
+                return;
+            }
             //Toggle editable
             Changable = State;
             // If editing now
@@ -66,12 +76,11 @@ namespace Number
             // If not editing anymore
             else
             {
+                // Save Result
+                NumberContent.ChangeNumber(NumberInput.StringValue);
                 // Stop Editing
-                if (NumberInput.StringValue != "")
-                {
-                    NumberContent.ChangeNumber(NumberInput.StringValue);
-                }
                 NumberInput.AbortEditing();
+                // Prevent Editing
                 NumberInput.Editable = false;
                 // Set title
                 ApplicationDelegate.SetChangeButtonTitle("Change");
@@ -86,31 +95,31 @@ namespace Number
         // Primary Mouse Button Click
         partial void ClickAction(NSObject sender)
         {
-            // Don't run if editing (Clicks may happen when editing)
-            if (Changable)
+            // Don't run if editing (Clicks may happen when editing) or ignore input
+            if (Changable || IgnoreInput)
             {
                 return;
             }
             // Add 1
-            NumberContent.ChangeNumber(NumberContent.NumberValue + 1);
+            NumberContent.ChangeNumber(NumberContent.NumberValue + PreferencesData.AddNumber);
         }
         // Secondary Mouse Button Click
         partial void SecondaryClickAction(NSObject sender)
         {
-            // Don't run if editing (Click may happen when editing)
-            if (Changable)
+            // Don't run if editing (Clicks may happen when editing) or ignore input
+            if (Changable || IgnoreInput)
             {
                 return;
             }
             // Minus 1
-            NumberContent.ChangeNumber(NumberContent.NumberValue - 1);
+            NumberContent.ChangeNumber(NumberContent.NumberValue - PreferencesData.MinusNumber);
         }
         async void ZoomActionLoop()
         {
             // Runs until the gesture ends
             while (CanRunZoom)
             {
-                Boolean Zoom = ZoomIn;
+                bool Zoom = ZoomIn;
                 if (InvertZoom)
                 {
                     Zoom = !Zoom;
@@ -119,12 +128,12 @@ namespace Number
                 if (Zoom)
                 {
                     // Subtract
-                    NumberContent.ChangeNumber(NumberContent.NumberValue - 1);
+                    NumberContent.ChangeNumber(NumberContent.NumberValue - PreferencesData.MinusNumber);
                 }
                 else
                 {
                     // Add
-                    NumberContent.ChangeNumber(NumberContent.NumberValue + 1);
+                    NumberContent.ChangeNumber(NumberContent.NumberValue + PreferencesData.AddNumber);
                 }
                 // Waits for 100ms
                 await Task.Delay(100);
@@ -135,6 +144,10 @@ namespace Number
         }
         partial void ZoomAction(Foundation.NSObject sender)
         {
+            if (IgnoreInput)
+            {
+                return;
+            }
             // When The Gesture Changed
             if (ZoomGesture.State == NSGestureRecognizerState.Changed)
             {
@@ -184,6 +197,10 @@ namespace Number
         }
         partial void SwirlAction(NSObject sender)
         {
+            if (IgnoreInput)
+            {
+                return;
+            }
             // Swirl Right
             if (SwirlGesture.RotationInDegrees < 0)
             {

@@ -14,6 +14,9 @@ namespace Number
 		[Outlet]
 		AppKit.NSMenuItem ChangeButton { get; set; }
 
+		[Action ("AboutAction:")]
+		partial void AboutAction (Foundation.NSObject sender);
+
 		[Action ("ChangeAction:")]
 		partial void ChangeAction (Foundation.NSObject sender);
 
@@ -25,6 +28,9 @@ namespace Number
 
 		[Action ("PasteAction:")]
 		partial void PasteAction (Foundation.NSObject sender);
+
+		[Action ("PreferencesAction:")]
+		partial void PreferencesAction (Foundation.NSObject sender);
 		
 		void ReleaseDesignerOutlets ()
 		{

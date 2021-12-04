@@ -204,7 +204,7 @@
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
                             <textField focusRingType="none" horizontalHuggingPriority="251" verticalHuggingPriority="750" textCompletion="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GRf-TS-YYf">
-                                <rect key="frame" x="-2" y="0.0" width="484" height="190"/>
+                                <rect key="frame" x="18" y="0.0" width="444" height="190"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="190" id="a6M-y1-9nV"/>
                                 </constraints>
@@ -220,8 +220,8 @@
                         </subviews>
                         <constraints>
                             <constraint firstItem="GRf-TS-YYf" firstAttribute="top" secondItem="ERx-hH-rdd" secondAttribute="top" id="fWP-rD-C4l"/>
-                            <constraint firstAttribute="trailing" secondItem="GRf-TS-YYf" secondAttribute="trailing" id="hsa-E9-hBi"/>
-                            <constraint firstItem="GRf-TS-YYf" firstAttribute="leading" secondItem="ERx-hH-rdd" secondAttribute="leading" id="stL-kS-mSo"/>
+                            <constraint firstAttribute="trailing" secondItem="GRf-TS-YYf" secondAttribute="trailing" constant="20" id="hsa-E9-hBi"/>
+                            <constraint firstItem="GRf-TS-YYf" firstAttribute="leading" secondItem="ERx-hH-rdd" secondAttribute="leading" constant="20" id="stL-kS-mSo"/>
                             <constraint firstAttribute="bottom" secondItem="GRf-TS-YYf" secondAttribute="bottom" id="xAC-8W-pN7"/>
                         </constraints>
                         <gestureRecognizers>
@@ -424,11 +424,11 @@
             <objects>
                 <viewController title="About" id="KkJ-0p-Ktj" userLabel="About" customClass="About" sceneMemberID="viewController">
                     <view key="view" wantsLayer="YES" id="NAH-1Y-H66">
-                        <rect key="frame" x="0.0" y="0.0" width="501" height="190"/>
+                        <rect key="frame" x="0.0" y="0.0" width="480" height="190"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="hke-dN-Mkw">
-                                <rect key="frame" x="18" y="110" width="465" height="50"/>
+                                <rect key="frame" x="18" y="110" width="444" height="50"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="50" id="Ffi-Uw-FnY"/>
                                 </constraints>
@@ -439,7 +439,7 @@
                                 </textFieldCell>
                             </textField>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="fNx-dL-7DF">
-                                <rect key="frame" x="18" y="49" width="465" height="28"/>
+                                <rect key="frame" x="18" y="49" width="444" height="28"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="28" id="vSi-me-spf"/>
                                 </constraints>
@@ -450,7 +450,7 @@
                                 </textFieldCell>
                             </textField>
                             <button focusRingType="none" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="PtE-YA-Bai">
-                                <rect key="frame" x="20" y="91" width="461" height="19"/>
+                                <rect key="frame" x="20" y="91" width="440" height="19"/>
                                 <buttonCell key="cell" type="square" title="https://github.com/charlesyiu" bezelStyle="shadowlessSquare" alignment="center" state="on" focusRingType="none" imageScaling="proportionallyDown" inset="2" id="XLm-r8-t2s">
                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                     <font key="font" metaFont="system" size="15"/>
@@ -461,7 +461,7 @@
                                 </connections>
                             </button>
                             <button focusRingType="none" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="p3t-Rv-x0a">
-                                <rect key="frame" x="20" y="30" width="461" height="19"/>
+                                <rect key="frame" x="20" y="30" width="440" height="19"/>
                                 <buttonCell key="cell" type="square" title="https://github.com/charlesyiu/number-app" bezelStyle="shadowlessSquare" alignment="center" state="on" focusRingType="none" imageScaling="proportionallyDown" inset="2" id="bVC-Sm-crO">
                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                     <font key="font" metaFont="system" size="15"/>
@@ -478,6 +478,7 @@
                             <constraint firstItem="p3t-Rv-x0a" firstAttribute="leading" secondItem="NAH-1Y-H66" secondAttribute="leading" constant="20" id="I0I-Xr-g38"/>
                             <constraint firstAttribute="trailing" secondItem="PtE-YA-Bai" secondAttribute="trailing" constant="20" id="JlL-fp-UyK"/>
                             <constraint firstItem="hke-dN-Mkw" firstAttribute="top" secondItem="NAH-1Y-H66" secondAttribute="top" constant="30" id="PDT-Ub-D89"/>
+                            <constraint firstItem="fNx-dL-7DF" firstAttribute="top" secondItem="PtE-YA-Bai" secondAttribute="bottom" constant="14" id="QAr-Sm-99a"/>
                             <constraint firstItem="hke-dN-Mkw" firstAttribute="leading" secondItem="NAH-1Y-H66" secondAttribute="leading" constant="20" id="SJm-qf-4S5"/>
                             <constraint firstItem="PtE-YA-Bai" firstAttribute="leading" secondItem="NAH-1Y-H66" secondAttribute="leading" constant="20" id="URs-XC-8EW"/>
                             <constraint firstAttribute="trailing" secondItem="p3t-Rv-x0a" secondAttribute="trailing" constant="20" id="fV0-6a-8y5"/>
@@ -490,7 +491,7 @@
                 </viewController>
                 <customObject id="qak-KE-5Hh" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1115.5" y="655"/>
+            <point key="canvasLocation" x="1105" y="649"/>
         </scene>
         <!--About Window-->
         <scene sceneID="SUl-zX-6of">

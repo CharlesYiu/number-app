@@ -1,5 +1,16 @@
 # Number App
 A MacOS based number editing app I made for practice
+# Build
+## Reqirements
+- [Visual Studio for Mac](https://visualstudio.microsoft.com/vs/mac/)
+- [Xcode](https://developer.apple.com/xcode/)
+- [MacOS](https://www.apple.com/macos/)
+## Steps
+1. Download all of the files and put it all in a folder
+2. Open the file "Number.sln" from the project folder with Visual Studio
+3. On the top left of Visual Studio, change the compiler configuration from "Debug" to "Release" 
+4. On the top bar, click Build -> Build Number
+5. After the app is built, you will find the application in \[project folder]/bin/Release/
 # Features
 ## Directly edit numbers
 You can type numbers into the app.  

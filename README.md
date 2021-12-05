@@ -1,5 +1,5 @@
 # Number App
-A MacOS based number editing app I am making for practice
+A MacOS based number editing app I made for practice
 # Features
 ## Directly edit numbers
 You can type numbers into the app.  

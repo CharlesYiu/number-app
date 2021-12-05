@@ -14,6 +14,15 @@ namespace Number
 		[Outlet]
 		AppKit.NSMenuItem ChangeButton { get; set; }
 
+		[Outlet]
+		AppKit.NSMenuItem CopyButton { get; set; }
+
+		[Outlet]
+		AppKit.NSMenuItem PasteButton { get; set; }
+
+		[Outlet]
+		AppKit.NSMenuItem ResetButton { get; set; }
+
 		[Action ("AboutAction:")]
 		partial void AboutAction (Foundation.NSObject sender);
 
@@ -37,6 +46,21 @@ namespace Number
 			if (ChangeButton != null) {
 				ChangeButton.Dispose ();
 				ChangeButton = null;
+			}
+
+			if (CopyButton != null) {
+				CopyButton.Dispose ();
+				CopyButton = null;
+			}
+
+			if (PasteButton != null) {
+				PasteButton.Dispose ();
+				PasteButton = null;
+			}
+
+			if (ResetButton != null) {
+				ResetButton.Dispose ();
+				ResetButton = null;
 			}
 		}
 	}

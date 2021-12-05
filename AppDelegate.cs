@@ -12,15 +12,14 @@ namespace Number
         public AppDelegate()
         {
         }
-
         public override void DidFinishLaunching(NSNotification notification)
         {
             // Insert code here to initialize your application
         }
         // Get current view controller
-        Number GetCurrentViewController()
+        NSViewController GetCurrentViewController()
         {
-            return((Number)NSApplication.SharedApplication.KeyWindow.ContentViewController);
+            return(NSApplication.SharedApplication.KeyWindow.ContentViewController);
         }
         public override void WillTerminate(NSNotification notification)
         {
@@ -33,29 +32,45 @@ namespace Number
         }
         partial void ChangeAction(NSObject sender)
         {
-            Number CurrentViewController = GetCurrentViewController();
-            // Toggle editing
-            CurrentViewController.SetChangable(!CurrentViewController.Changable);
+            try
+            {
+                Number CurrentViewController = (Number)GetCurrentViewController();
+                // Toggle editing
+                CurrentViewController.SetChangable(!CurrentViewController.Changable);
+            }
+            catch (InvalidCastException) { }
         }
         partial void DeleteAction(NSObject sender)
         {
-            Number CurrentViewController = GetCurrentViewController();
-            // If changable
-            if (CurrentViewController.Changable)
+            try
             {
-                // set changable to false
-                CurrentViewController.SetChangable(false);
+                Number CurrentViewController = (Number)GetCurrentViewController();
+                // If changable
+                if (CurrentViewController.Changable)
+                {
+                    // set changable to false
+                    CurrentViewController.SetChangable(false);
+                }
+                // Reset
+                CurrentViewController.NumberContent.ChangeNumber(PreferencesData.DefaultNumber);
             }
-            // Reset
-            CurrentViewController.NumberContent.ChangeNumber(PreferencesData.DefaultNumber);
+            catch (InvalidCastException) { }
         }
         partial void CopyAction(NSObject sender)
         {
-            GetCurrentViewController().NumberContent.CopyNumber();
+            try
+            {
+                ((Number)GetCurrentViewController()).NumberContent.CopyNumber();
+            }
+            catch (InvalidCastException) { }
         }
         partial void PasteAction(NSObject sender)
         {
-            GetCurrentViewController().NumberContent.PasteNumber();
+            try
+            {
+                ((Number)GetCurrentViewController()).NumberContent.PasteNumber();
+            }
+            catch (InvalidCastException) { }
         }
         void FindPreferences(NSWindow Window, ref bool Stop)
         {
@@ -85,15 +100,11 @@ namespace Number
                 return;
             }
             // else create new window
-            // Vars
+            // get window
             NSStoryboard Storyboard = NSStoryboard.FromName("Main", null);
             NSWindowController WindowController = (NSWindowController)Storyboard.InstantiateControllerWithIdentifier("Preferences");
             // If There's a windowcontroller
-            if (WindowController != null)
-            {
-                // Show
-                WindowController.ShowWindow(WindowController.Window);
-            }
+            WindowController.ShowWindow(WindowController.Window);
         }
         void FindAbout(NSWindow Window, ref bool Stop)
         {
@@ -105,7 +116,7 @@ namespace Number
                 // stop
                 Stop = true;
             }
-            catch (InvalidCastException) { };
+            catch (InvalidCastException) { }
         }
         partial void AboutAction(NSObject sender)
         {
@@ -127,11 +138,7 @@ namespace Number
             NSStoryboard Storyboard = NSStoryboard.FromName("Main", null);
             NSWindowController WindowController = (NSWindowController)Storyboard.InstantiateControllerWithIdentifier("About");
             // If There's a windowcontroller
-            if (WindowController != null)
-            {
-                // Show
-                WindowController.ShowWindow(WindowController.Window);
-            }
+            WindowController.ShowWindow(WindowController.Window);
         }
     }
 }

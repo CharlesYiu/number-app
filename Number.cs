@@ -17,11 +17,13 @@ namespace Number
         nfloat MagnificationChange = 0.020f;
         nfloat ChangedMagnification = 0f;
         nfloat LastMagnification;
+
         public Document.Content NumberContent;
         public NSWindow Window;
         AppDelegate ApplicationDelegate = (AppDelegate)NSApplication.SharedApplication.Delegate;
+
         public bool Changable = false;
-        public bool IgnoreInput = false;
+
         partial class NumberInputDelegate : NSTextFieldDelegate
         {
             [Export("controlTextDidChange:")]
@@ -56,10 +58,6 @@ namespace Number
         // Function to make NumberInput Editable
         public void SetChangable(bool State)
         {
-            if (IgnoreInput)
-            {
-                return;
-            }
             //Toggle editable
             Changable = State;
             // If editing now
@@ -95,8 +93,8 @@ namespace Number
         // Primary Mouse Button Click
         partial void ClickAction(NSObject sender)
         {
-            // Don't run if editing (Clicks may happen when editing) or ignore input
-            if (Changable || IgnoreInput)
+            // Don't run if editing (Clicks may happen when editing)
+            if (Changable)
             {
                 return;
             }
@@ -106,8 +104,8 @@ namespace Number
         // Secondary Mouse Button Click
         partial void SecondaryClickAction(NSObject sender)
         {
-            // Don't run if editing (Clicks may happen when editing) or ignore input
-            if (Changable || IgnoreInput)
+            // Don't run if editing (Clicks may happen when editing)
+            if (Changable)
             {
                 return;
             }
@@ -144,10 +142,6 @@ namespace Number
         }
         partial void ZoomAction(Foundation.NSObject sender)
         {
-            if (IgnoreInput)
-            {
-                return;
-            }
             // When The Gesture Changed
             if (ZoomGesture.State == NSGestureRecognizerState.Changed)
             {
@@ -197,10 +191,6 @@ namespace Number
         }
         partial void SwirlAction(NSObject sender)
         {
-            if (IgnoreInput)
-            {
-                return;
-            }
             // Swirl Right
             if (SwirlGesture.RotationInDegrees < 0)
             {

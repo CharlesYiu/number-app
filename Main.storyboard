@@ -101,9 +101,9 @@
                                     </items>
                                 </menu>
                             </menuItem>
-                            <menuItem title="Edit" id="Jru-vc-rbO">
+                            <menuItem title="Value" id="Jru-vc-rbO">
                                 <modifierMask key="keyEquivalentModifierMask"/>
-                                <menu key="submenu" title="Edit" id="SWP-Sq-UGj">
+                                <menu key="submenu" title="Value" id="SWP-Sq-UGj">
                                     <items>
                                         <menuItem title="Change" keyEquivalent="e" id="7ec-vJ-B4C">
                                             <connections>
@@ -163,6 +163,9 @@
                 <customObject id="Voe-Tx-rLC" customClass="AppDelegate">
                     <connections>
                         <outlet property="ChangeButton" destination="7ec-vJ-B4C" id="Js6-f0-oLs"/>
+                        <outlet property="CopyButton" destination="B2Y-FD-qhX" id="XZP-PH-v6l"/>
+                        <outlet property="PasteButton" destination="J9j-dJ-3UO" id="eZA-PO-kWh"/>
+                        <outlet property="ResetButton" destination="Rgk-Ol-fJT" id="wpA-e3-FBK"/>
                     </connections>
                 </customObject>
                 <customObject id="YLy-65-1bz" customClass="NSFontManager"/>
@@ -258,10 +261,10 @@
             </objects>
             <point key="canvasLocation" x="94" y="655"/>
         </scene>
-        <!--Window Controller-->
+        <!--Preferences Window-->
         <scene sceneID="dXY-8A-cAX">
             <objects>
-                <windowController storyboardIdentifier="Preferences" id="Fs7-KF-Vem" sceneMemberID="viewController">
+                <windowController storyboardIdentifier="Preferences" id="Fs7-KF-Vem" userLabel="Preferences Window" sceneMemberID="viewController">
                     <window key="window" title="Number: Prefereces" separatorStyle="none" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" releasedWhenClosed="NO" visibleAtLaunch="NO" frameAutosaveName="" animationBehavior="default" titleVisibility="hidden" id="Mm7-KS-Dca">
                         <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES" resizable="YES" fullSizeContentView="YES"/>
                         <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>

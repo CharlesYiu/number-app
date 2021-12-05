@@ -7,8 +7,6 @@ namespace Number
     [Register("AppDelegate")]
     public partial class AppDelegate : NSApplicationDelegate
     {
-        NSWindow PreferencesWindow;
-        NSWindow AboutWindow;
         public AppDelegate()
         {
         }
@@ -72,31 +70,31 @@ namespace Number
             }
             catch (InvalidCastException) { }
         }
-        void FindPreferences(NSWindow Window, ref bool Stop)
-        {
-            try
-            {
-                // if is window
-                _ = (Preferences)Window.ContentViewController;
-                PreferencesWindow = Window;
-                // stop
-                Stop = true;
-            }
-            catch (InvalidCastException) {};
-        }
         partial void PreferencesAction(NSObject sender)
         {
+            bool FoundPreferences = false;
+            void FindPreferences(NSWindow Window, ref bool Stop)
+            {
+                try
+                {
+                    // if is window
+                    _ = (Preferences)Window.ContentViewController;
+                    Window.MakeKeyAndOrderFront(Window);
+                    FoundPreferences = true;
+                    // stop
+                    Stop = true;
+                }
+                catch (InvalidCastException) { };
+            }
             // find preferences window
-            PreferencesWindow = null;
             NSApplication.SharedApplication.EnumerateWindows(
                 NSWindowListOptions.OrderedFrontToBack,
                 new NSApplicationEnumerateWindowsHandler(FindPreferences)
             );
             // if there is a preferences window
-            if (PreferencesWindow != null)
+            if (FoundPreferences)
             {
-                // focus
-                PreferencesWindow.MakeKeyWindow();
+                // exit
                 return;
             }
             // else create new window
@@ -106,31 +104,31 @@ namespace Number
             // If There's a windowcontroller
             WindowController.ShowWindow(WindowController.Window);
         }
-        void FindAbout(NSWindow Window, ref bool Stop)
-        {
-            try
-            {
-                // if is window
-                _ = (About)Window.ContentViewController;
-                PreferencesWindow = Window;
-                // stop
-                Stop = true;
-            }
-            catch (InvalidCastException) { }
-        }
         partial void AboutAction(NSObject sender)
         {
+            bool FoundAbout = false;
+            void FindAbout(NSWindow Window, ref bool Stop)
+            {
+                try
+                {
+                    // if is window
+                    _ = (About)Window.ContentViewController;
+                    Window.MakeKeyAndOrderFront(Window);
+                    FoundAbout = true;
+                    // stop
+                    Stop = true;
+                }
+                catch (InvalidCastException) { }
+            }
             // find about window
-            AboutWindow = null;
             NSApplication.SharedApplication.EnumerateWindows(
                 NSWindowListOptions.OrderedFrontToBack,
                 new NSApplicationEnumerateWindowsHandler(FindAbout)
             );
             // if there is an about window
-            if (AboutWindow != null)
+            if (FoundAbout)
             {
-                // focus
-                AboutWindow.MakeKeyWindow();
+                // exit
                 return;
             }
             // else create new window

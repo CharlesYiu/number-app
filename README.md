@@ -24,7 +24,8 @@ The ability to copy and paste numbers.
 ## Reset number
 Resets the number to its default value.
 ## Decimal points
-The app can add or minus numbers with decimals
+The app can add or minus numbers with decimals.  
+**Note:** You must turn off "round decimals" and set decimal numbers for "add value" and "minus value" in preferences.
 ## Preferences
 Customize the behavior of the app.  
 **Default value:** The value to use when there is a reset or new file.  
@@ -50,6 +51,10 @@ Adds 1 or the preferred value repeatedly
 Subtracts 1 or the preferred value repeatedly   
 (When the number is negative it will add instead)
 # Shortcuts
+## Copy number
+Command+c
+## Paste number
+Command+v
 ## Change number
 Command+e
 ## Reset number

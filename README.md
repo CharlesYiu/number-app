@@ -25,7 +25,7 @@ The ability to copy and paste numbers.
 Resets the number to its default value.
 ## Decimal points
 The app can add or minus numbers with decimals.  
-**Note:** You must turn off "round decimals" and set decimal numbers for "add value" and "minus value" in preferences.
+**Note:** You must turn off "round decimals" and set at least 1 decimal number for "add value" or "minus value" in preferences.
 ## Preferences
 Customize the behavior of the app.  
 **Default value:** The value to use when there is a reset or new file.  
